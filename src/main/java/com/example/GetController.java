@@ -8,14 +8,14 @@ import java.util.List;
 @RestController
 public class GetController {
 
-    private final ICustomerRepository customerRepository;
+    private final IGetService getService;
 
-    public GetController(ICustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public GetController(IGetService getService) {
+        this.getService = getService;
     }
 
     @GetMapping("api/v1/customers")
     public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+        return getService.getCustomers();
     }
 }

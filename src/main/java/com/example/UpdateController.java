@@ -1,22 +1,22 @@
 package com.example;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
 public class UpdateController {
 
-    private final ICustomerRepository customerRepository;
+    private final IUpdateService updateService;
 
-    public UpdateController(ICustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public UpdateController(IUpdateService updateService) {
+        this.updateService = updateService;
     }
 
     @PutMapping("/api/v1/customers/{customerId}")
-    public void updateCustomer(@PathVariable("customerId") Integer id, @RequestBody Customer customerFromRequest){
-        Customer customer = customerRepository.getReferenceById(id);
-        customer.setName(customerFromRequest.getName());
-        customer.setAge(customerFromRequest.getAge());
-        customer.setEmail(customerFromRequest.getEmail());
-        customerRepository.save(customer);
+    public ResponseEntity<String> updateCustomer(@PathVariable("customerId") Integer id, @RequestBody Customer customerFromRequest){
+        updateService.updateCustomer(id, customerFromRequest);
+        return ok().body("Customer with id " + id + " updated");
     }
 }

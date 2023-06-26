@@ -1,5 +1,6 @@
 package com.example;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,18 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PostController {
 
-    private final ICustomerRepository customerRepository;
+    private final IPostService postService;
 
-    public PostController(ICustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public PostController(IPostService postService) {
+        this.postService = postService;
     }
 
     @PostMapping("api/v1/customers")
-    public void addCustomer(@RequestBody NewCustomerRequest request) {
-        Customer customer = new Customer();
-        customer.setName(request.getName());
-        customer.setEmail(request.getEmail());
-        customer.setAge(request.getAge());
-        customerRepository.save(customer);
+    public ResponseEntity<String> addCustomer(@RequestBody NewCustomerRequest request) {
+        postService.addCustomer(request);
+        return ResponseEntity.ok().body("Customer created");
     }
 }
