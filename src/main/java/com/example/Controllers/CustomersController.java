@@ -1,5 +1,11 @@
-package com.example;
+package com.example.Controllers;
 
+import com.example.*;
+import com.example.Interfaces.IDeleteService;
+import com.example.Interfaces.IGetService;
+import com.example.Interfaces.IPostService;
+import com.example.Interfaces.IUpdateService;
+import com.example.Models.Customer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

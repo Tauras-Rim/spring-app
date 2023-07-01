@@ -1,11 +1,14 @@
-package com.example;
+package com.example.Services;
 
+import com.example.CustomerRepository;
+import com.example.Interfaces.IGetService;
+import com.example.Models.Customer;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class GetService implements IGetService{
+public class GetService implements IGetService {
 
     private final CustomerRepository customerRepository;
 

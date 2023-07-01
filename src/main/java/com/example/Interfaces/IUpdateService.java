@@ -1,4 +1,6 @@
-package com.example;
+package com.example.Interfaces;
+
+import com.example.Models.Customer;
 
 public interface IUpdateService {
 

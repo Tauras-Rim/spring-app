@@ -1,9 +1,13 @@
-package com.example;
+package com.example.Services;
 
+import com.example.CustomerRepository;
+import com.example.Interfaces.IPostService;
+import com.example.Models.Customer;
+import com.example.NewCustomerRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostService implements IPostService{
+public class PostService implements IPostService {
 
     private final CustomerRepository customerRepository;
 

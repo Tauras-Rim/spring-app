@@ -1,4 +1,6 @@
-package com.example;
+package com.example.Interfaces;
+
+import com.example.NewCustomerRequest;
 
 public interface IPostService {
 

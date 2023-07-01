@@ -1,5 +1,8 @@
-package com.example;
+package com.example.Services;
 
+import com.example.CustomerRepository;
+import com.example.Interfaces.IUpdateService;
+import com.example.Models.Customer;
 import org.springframework.stereotype.Service;
 
 @Service
