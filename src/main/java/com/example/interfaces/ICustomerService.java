@@ -1,7 +1,6 @@
-package com.example.Interfaces;
+package com.example.interfaces;
 
-import com.example.Models.Customer;
-import com.example.Models.NewCustomerRequest;
+import com.example.models.Customer;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public interface ICustomerService {
 
     List<Customer> getCustomers();
 
-    void addCustomer( NewCustomerRequest request);
+    void addCustomer(Customer request);
 
     void updateCustomer(Integer id, Customer customerFromRequest);
 }

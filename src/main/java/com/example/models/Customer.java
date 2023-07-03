@@ -1,28 +1,26 @@
-package com.example.Models;
+package com.example.models;
 
 import jakarta.persistence.*;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.lang.NonNull;
 
 import java.util.Objects;
 
 @Entity
-@Validated
 public class Customer {
 
     @Id
     @SequenceGenerator(name = "customer_id_sequence", sequenceName = "customer_id_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
     private Integer id;
-    private String name;
-    private String email;
-    private Integer age;
 
-    public Customer(Integer id, String name, String email, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.age = age;
-    }
+    @NonNull
+    private String name;
+
+    @NonNull
+    private String email;
+
+    @NonNull
+    private Integer age;
 
     public Customer() {
 
