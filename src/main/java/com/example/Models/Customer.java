@@ -1,10 +1,12 @@
 package com.example.Models;
 
 import jakarta.persistence.*;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
 
 @Entity
+@Validated
 public class Customer {
 
     @Id

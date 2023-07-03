@@ -1,8 +1,12 @@
-package com.example;
+package com.example.Models;
+
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
 
+@Validated
 public class NewCustomerRequest {
+
     private String name;
     private String email;
     private Integer age;
