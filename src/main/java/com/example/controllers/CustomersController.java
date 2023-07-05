@@ -3,9 +3,9 @@ package com.example.controllers;
 import com.example.interfaces.*;
 import com.example.models.Customer;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -33,16 +33,13 @@ public class CustomersController {
     }
 
     @PostMapping
-    public ResponseEntity<String> addCustomer(@Valid @RequestBody Customer request) {
-        if (request.getAge() == null || request.getName() == null || request.getEmail() == null) {
-            return badRequest().body("All fields are required");
-        }
+    public ResponseEntity<String> addCustomer(@RequestBody @Valid Customer request) {
         customerService.addCustomer(request);
         return ok("Customer created");
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity<String> updateCustomer(@PathVariable Integer customerId, @Valid @RequestBody Customer customerFromRequest) {
+    public ResponseEntity<String> updateCustomer(@PathVariable Integer customerId, @RequestBody @Valid Customer customerFromRequest) {
         if (customerFromRequest.getName() == null || customerFromRequest.getEmail() == null || customerFromRequest.getAge() == null) {
             return badRequest().body("All fields are required");
         }

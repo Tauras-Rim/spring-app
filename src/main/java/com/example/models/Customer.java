@@ -1,8 +1,7 @@
 package com.example.models;
 
 import jakarta.persistence.*;
-import org.springframework.lang.NonNull;
-
+import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -13,13 +12,13 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customer_id_sequence")
     private Integer id;
 
-    @NonNull
+    @NotNull
     private String name;
 
-    @NonNull
+    @NotNull
     private String email;
 
-    @NonNull
+    @NotNull
     private Integer age;
 
     public Customer() {
