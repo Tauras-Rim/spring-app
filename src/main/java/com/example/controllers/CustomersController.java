@@ -26,16 +26,16 @@ public class CustomersController {
         return ok(customerService.getCustomers());
     }
 
-    @DeleteMapping("/{customerId}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable Integer customerId) {
-        customerService.deleteCustomer(customerId);
-        return ok("Customer with id " + customerId + " deleted successfully");
-    }
-
     @PostMapping
     public ResponseEntity<String> addCustomer(@RequestBody @Valid Customer request) {
         customerService.addCustomer(request);
         return ok("Customer created");
+    }
+
+    @DeleteMapping("/{customerId}")
+    public ResponseEntity<String> deleteCustomer(@PathVariable Integer customerId) {
+        customerService.deleteCustomer(customerId);
+        return ok("Customer with id " + customerId + " deleted successfully");
     }
 
     @PutMapping("/{customerId}")

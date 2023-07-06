@@ -40,6 +40,5 @@ public class CustomerService implements ICustomerService {
         } else {
             throw new EntityNotFoundException("Customer with id " + id + " not found");
         }
-
     }
 }

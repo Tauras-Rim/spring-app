@@ -2,6 +2,8 @@ package com.example.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,9 +23,8 @@ public class Customer {
     @NotNull
     private Integer age;
 
-    public Customer() {
-
-    }
+    @OneToMany(mappedBy = "customer")
+    private List<Book> books;
 
     public Integer getId() {
         return id;
@@ -55,6 +56,14 @@ public class Customer {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override
