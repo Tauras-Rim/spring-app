@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.interfaces.IBookService;
 import com.example.models.Book;
+import com.example.models.BookDTO;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> getBooks() {
+    public ResponseEntity<List<BookDTO>> getBooks() {
         return ok(bookService.getBooks());
     }
 
@@ -39,7 +40,7 @@ public class BookController {
     }
 
     @PutMapping("/{bookId}")
-    public ResponseEntity<String> updatebook(@PathVariable Integer bookId, @RequestBody @Valid Book book) {
+    public ResponseEntity<String> updateBook(@PathVariable Integer bookId, @RequestBody @Valid Book book) {
         bookService.updateBook(bookId, book);
         return ok("book with id " + bookId + " updated");
     }

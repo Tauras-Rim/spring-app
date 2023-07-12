@@ -1,8 +1,10 @@
 package com.example.services;
 
 import com.example.BookRepository;
+import com.example.interfaces.BookMapper;
 import com.example.interfaces.IBookService;
 import com.example.models.Book;
+import com.example.models.BookDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
+    protected final BookMapper bookMapper;
 
-    public BookService(BookRepository bookRepository) {
+    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
+        this.bookMapper = bookMapper;
     }
 
     public void deleteBook(Integer id) {
@@ -25,8 +29,11 @@ public class BookService implements IBookService {
         }
     }
 
-    public List<Book> getBooks() {
-        return bookRepository.findAll();
+    public List<BookDTO> getBooks() {
+        List<Book> books = bookRepository.findAll();
+        return  books.stream()
+                .map(bookMapper::bookToBookDTO)
+                .toList();
     }
 
     public void addBook(Book book) {

@@ -18,10 +18,20 @@ public class Book {
     private String author;
 
     @NotNull
-    private int pageCount;
+    private Integer pageCount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Customer customer;
+
+    public Book() {
+    }
+
+    public Book(String title, String author, Integer pageCount, Customer customer) {
+        this.title = title;
+        this.author = author;
+        this.pageCount = pageCount;
+        this.customer = customer;
+    }
 
     public Integer getId() {
         return id;
@@ -35,7 +45,7 @@ public class Book {
         return author;
     }
 
-    public int getPageCount() {
+    public Integer getPageCount() {
         return pageCount;
     }
 
@@ -55,7 +65,7 @@ public class Book {
         this.author = author;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
 

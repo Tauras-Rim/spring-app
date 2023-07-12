@@ -1,8 +1,10 @@
 package com.example.services;
 
 import com.example.CustomerRepository;
+import com.example.interfaces.CustomerMapper;
 import com.example.interfaces.ICustomerService;
 import com.example.models.Customer;
+import com.example.models.CustomerDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
+    protected final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     public void deleteCustomer(Integer id) {
@@ -25,8 +29,11 @@ public class CustomerService implements ICustomerService {
         }
     }
 
-    public List<Customer> getCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> getCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return customers.stream()
+                .map(customerMapper::customerToCustomerDTO)
+                .toList();
     }
 
     public void addCustomer(Customer customer) {

@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import com.example.interfaces.*;
 import com.example.models.Customer;
+import com.example.models.CustomerDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class CustomersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getCustomers() {
+    public ResponseEntity<List<CustomerDTO>> getCustomers() {
         return ok(customerService.getCustomers());
     }
 

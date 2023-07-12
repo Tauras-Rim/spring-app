@@ -23,8 +23,18 @@ public class Customer {
     @NotNull
     private Integer age;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
     private List<Book> books;
+
+    public Customer() {
+    }
+
+    public Customer(String name, String email, Integer age, List<Book> books) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.books = books;
+    }
 
     public Integer getId() {
         return id;
