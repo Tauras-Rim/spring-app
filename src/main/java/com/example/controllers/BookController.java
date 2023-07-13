@@ -38,7 +38,7 @@ public class BookController {
         return ok("Book with id " + bookId + " deleted successfully");
     }
 
-    @PutMapping("/{bookId}")
+    @PutMapping
     public ResponseEntity<String> updateBook(@RequestBody @Valid Book book) {
         bookService.updateBook(book);
         return ok("book with id " + book.getId() + " updated");

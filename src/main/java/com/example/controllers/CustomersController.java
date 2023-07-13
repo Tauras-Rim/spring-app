@@ -38,7 +38,7 @@ public class CustomersController {
         return ok("Customer with id " + customerId + " deleted successfully");
     }
 
-    @PutMapping("/{customerId}")
+    @PutMapping
     public ResponseEntity<String> updateCustomer(@RequestBody @Valid Customer customer) {
         customerService.updateCustomer(customer);
         return ok("Customer with id " + customer.getId() + " updated");
