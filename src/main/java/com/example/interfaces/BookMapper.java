@@ -11,5 +11,5 @@ public interface BookMapper {
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     @Mapping(source = "customer.id", target = "customerId")
-    BookDTO bookToBookDTO(Book book);
+    BookDTO toDTO(Book book);
 }

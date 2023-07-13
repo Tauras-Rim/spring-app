@@ -3,7 +3,6 @@ package com.example.controllers;
 import com.example.interfaces.IBookService;
 import com.example.models.Book;
 import com.example.models.BookDTO;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,13 +39,8 @@ public class BookController {
     }
 
     @PutMapping("/{bookId}")
-    public ResponseEntity<String> updateBook(@PathVariable Integer bookId, @RequestBody @Valid Book book) {
-        bookService.updateBook(bookId, book);
-        return ok("book with id " + bookId + " updated");
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleException(EntityNotFoundException entityNotFoundException) {
-        return notFound().build();
+    public ResponseEntity<String> updateBook(@RequestBody @Valid Book book) {
+        bookService.updateBook(book);
+        return ok("book with id " + book.getId() + " updated");
     }
 }

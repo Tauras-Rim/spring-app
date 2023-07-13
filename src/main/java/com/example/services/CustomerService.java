@@ -1,6 +1,6 @@
 package com.example.services;
 
-import com.example.CustomerRepository;
+import com.example.repositories.CustomerRepository;
 import com.example.interfaces.CustomerMapper;
 import com.example.interfaces.ICustomerService;
 import com.example.models.Customer;
@@ -14,7 +14,7 @@ import java.util.List;
 public class CustomerService implements ICustomerService {
 
     private final CustomerRepository customerRepository;
-    protected final CustomerMapper customerMapper;
+    private final CustomerMapper customerMapper;
 
     public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
@@ -32,7 +32,7 @@ public class CustomerService implements ICustomerService {
     public List<CustomerDTO> getCustomers() {
         List<Customer> customers = customerRepository.findAll();
         return customers.stream()
-                .map(customerMapper::customerToCustomerDTO)
+                .map(customerMapper::toDTO)
                 .toList();
     }
 
@@ -40,12 +40,12 @@ public class CustomerService implements ICustomerService {
         customerRepository.save(customer);
     }
 
-    public void updateCustomer(Integer id, Customer customer) {
-        if (customerRepository.existsById(id)) {
-            customer.setId(id);
+    public void updateCustomer(Customer customer) {
+        if (customerRepository.existsById(customer.getId())) {
+            customer.setId(customer.getId());
             customerRepository.save(customer);
         } else {
-            throw new EntityNotFoundException("Customer with id " + id + " not found");
+            throw new EntityNotFoundException("Customer with id " + customer.getId() + " not found");
         }
     }
 }

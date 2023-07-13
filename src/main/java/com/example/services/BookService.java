@@ -1,6 +1,6 @@
 package com.example.services;
 
-import com.example.BookRepository;
+import com.example.repositories.BookRepository;
 import com.example.interfaces.BookMapper;
 import com.example.interfaces.IBookService;
 import com.example.models.Book;
@@ -14,7 +14,7 @@ import java.util.List;
 public class BookService implements IBookService {
 
     private final BookRepository bookRepository;
-    protected final BookMapper bookMapper;
+    private final BookMapper bookMapper;
 
     public BookService(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
@@ -32,7 +32,7 @@ public class BookService implements IBookService {
     public List<BookDTO> getBooks() {
         List<Book> books = bookRepository.findAll();
         return  books.stream()
-                .map(bookMapper::bookToBookDTO)
+                .map(bookMapper::toDTO)
                 .toList();
     }
 
@@ -40,12 +40,12 @@ public class BookService implements IBookService {
         bookRepository.save(book);
     }
 
-    public void updateBook(Integer id, Book book) {
-        if (bookRepository.existsById(id)) {
-            book.setId(id);
+    public void updateBook(Book book) {
+        if (bookRepository.existsById(book.getId())) {
+            book.setId(book.getId());
             bookRepository.save(book);
         } else {
-            throw new EntityNotFoundException("Book with id " + id + " not found");
+            throw new EntityNotFoundException("Book with id " + book.getId() + " not found");
         }
     }
 }

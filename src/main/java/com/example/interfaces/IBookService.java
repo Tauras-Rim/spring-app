@@ -13,5 +13,5 @@ public interface IBookService {
 
     void addBook(Book book);
 
-    void updateBook(Integer id, Book book);
+    void updateBook(Book book);
 }

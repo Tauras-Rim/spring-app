@@ -17,12 +17,12 @@ public interface CustomerMapper {
 
 
     @Mapping(source = "customer.books", target = "books", qualifiedByName = "getBooks")
-    CustomerDTO customerToCustomerDTO(Customer customer);
+    CustomerDTO toDTO(Customer customer);
 
     @Named("getBooks")
     default List<BookDTO> getBooks(List<Book> books) {
         return books.stream()
-                .map(BookMapper.INSTANCE::bookToBookDTO)
+                .map(BookMapper.INSTANCE::toDTO)
                 .toList();
     }
 }

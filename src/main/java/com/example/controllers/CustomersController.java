@@ -3,7 +3,6 @@ package com.example.controllers;
 import com.example.interfaces.*;
 import com.example.models.Customer;
 import com.example.models.CustomerDTO;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -40,16 +39,8 @@ public class CustomersController {
     }
 
     @PutMapping("/{customerId}")
-    public ResponseEntity<String> updateCustomer(@PathVariable Integer customerId, @RequestBody @Valid Customer customerFromRequest) {
-        if (customerFromRequest.getName() == null || customerFromRequest.getEmail() == null || customerFromRequest.getAge() == null) {
-            return badRequest().body("All fields are required");
-        }
-        customerService.updateCustomer(customerId, customerFromRequest);
-        return ok("Customer with id " + customerId + " updated");
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleException(EntityNotFoundException entityNotFoundException) {
-        return notFound().build();
+    public ResponseEntity<String> updateCustomer(@RequestBody @Valid Customer customer) {
+        customerService.updateCustomer(customer);
+        return ok("Customer with id " + customer.getId() + " updated");
     }
 }

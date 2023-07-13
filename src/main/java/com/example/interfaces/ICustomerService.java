@@ -13,5 +13,5 @@ public interface ICustomerService {
 
     void addCustomer(Customer request);
 
-    void updateCustomer(Integer id, Customer customerFromRequest);
+    void updateCustomer(Customer customerFromRequest);
 }
