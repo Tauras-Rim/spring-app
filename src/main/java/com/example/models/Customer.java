@@ -2,6 +2,8 @@ package com.example.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,8 +23,17 @@ public class Customer {
     @NotNull
     private Integer age;
 
-    public Customer() {
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST)
+    private List<Book> books;
 
+    public Customer() {
+    }
+
+    public Customer(String name, String email, Integer age, List<Book> books) {
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.books = books;
     }
 
     public Integer getId() {
@@ -55,6 +66,14 @@ public class Customer {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
     @Override
